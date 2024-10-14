@@ -1,30 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 function Department() {
 
     // Array For Employees Data
     let [departmentData, setdepartmentData] = useState<Array<Idepartment>>([]);
-
-    // Variable for getting Employees Data 
-
-    let [departmentName, setDepartmentName] = useState('');
-    let [description, setDescription] = useState('');
-    let [code, setCode] = useState<number>(100);
-
-    // Variable for Handling Department Id 
-
-    let [departmentid, setdepartmentId] = useState<number>();
-    let departmentIdd = useRef(0);
-
-    // Variable for Handling Department Id
-
-    let departmentCode = useRef(100);
-
-    // Show And Hide pages variable
-
-    let [isCreating, setIsCreating] = useState(false);
-    let [isEditing, setIsEditing] = useState(false);
-    // let [isdepartment, setdepartment] = useState(true);
-    let [isList, setIsList] = useState(true);
 
     // Get Data From localstorage
 
@@ -39,68 +18,6 @@ function Department() {
             console.log('page Refresh But Data Empty');
         }
     }, []);
-
-    // function for Saving and Editing Department data
-
-    const addEmploy = () => {
-        debugger;
-        if (isCreating == true) {
-            if (departmentid && departmentName && description) {
-                departmentData.push(
-                    {
-                        code: code,
-                        id: departmentid,
-                        department: departmentName,
-                        description: description
-                    }
-                )
-            }
-        }
-        if (isEditing == true) {
-            let index;
-            departmentData.map((d, i) => {
-                if (d.id == departmentid) {
-                    index = i;
-                }
-            }
-            )
-            departmentData[index].description = description;
-            departmentData[index].department = departmentName;
-        }
-
-        const newData = [...departmentData];
-        setdepartmentData(newData);
-        localStorage.setItem('departmentData', JSON.stringify(newData));
-
-        setIsList(true);
-        setIsCreating(false);
-        setIsEditing(false);
-    }
-
-
-    // Function For Handling Department Editing Data
-    const handleCreatingDepartmentData = () => {
-        setDescription('');
-        setDepartmentName('');
-        departmentIdd.current++;
-        setdepartmentId(departmentIdd.current);
-        departmentCode.current++;
-        setCode(departmentCode.current);
-        setIsList(false);
-        setIsEditing(false);
-        setIsCreating(true);
-    }
-
-    // Function For Handling Department Creaing Data
-    const handleEditingDepartmentData = (e: any) => {
-        setdepartmentId(e.id);
-        setDepartmentName(e.department);
-        setDescription(e.description);
-        setIsList(false);
-        setIsEditing(true);
-        setIsCreating(false);
-    }
-
     //  Function for Delete Employee Data
     const deleteDepartment = (e: any) => {
         let index;
@@ -110,19 +27,11 @@ function Department() {
             }
         }
         )
-        departmentData.splice(index, 1);
+        departmentData.splice(index!, 1);
         const newData = [...departmentData];
         setdepartmentData(newData);
         localStorage.setItem('departmentData', JSON.stringify(newData));
     }
-
-    // Function to show and hide input field by some button
-    const changes = () => {
-        setIsList(true);
-        setIsEditing(false);
-        setIsCreating(false);
-    }
-
 
     return (
         <div>
@@ -140,28 +49,16 @@ function Department() {
             <div className="space"></div>
 
 
-            {/* Creating Input Field for Getting Employees Data*/}
-            <div className={isEditing == true || isCreating == true ? "department-input-field" : "department-input-field d-none"}>
-                <div className="Header">
-                    <h4>Update Department</h4>
-                    <div className="back-button">
-                        <button type="button" onClick={changes} className="btn btn-success"><i className="fa-solid fa-circle-arrow-left"> </i> BACK</button>
-                    </div>
-                </div>
-                <div className="input-field department">Department <p> Name</p><span>*</span><input type="text" className="form-control" placeholder="Enter Department Name" value={departmentName} onChange={(e: any) => { setDepartmentName(e.target.value) }} /></div>
-                <div className="input-field description"> Description<span>*</span><input type="text" className="form-control" placeholder="Enter Department Description" value={description} onChange={(e: any) => { setDescription(e.target.value) }} /></div>
-                <div className="col-md-2 mx-auto">
-                    <button type="button" className="btn btn-success" onClick={addEmploy}>SUBMIT</button></div>
-            </div>
+            
 
             {/* All Employees List */}
 
             <div className="department-list">
-                <div className={isList == true ? "employees List" : "employees List d-none"}>
+                <div className="employees List">
                     <div className="header-2 depatment-list">
                         <h4>Manage DepartMent</h4>
                         <div className="back-button">
-                            <button type="button" className="btn btn-success" onClick={handleCreatingDepartmentData}>Add</button>
+                           <Link to={"/add-department?depId=0"}> <button type="button" className="btn btn-success">Add</button></Link>
                         </div>
                         <div className="back-button">
                             <button type="button" className="btn btn-success"><i className="fa-solid fa-circle-arrow-left"> </i>Back</button>
@@ -184,7 +81,7 @@ function Department() {
                                         <td>{dp.department}</td>
                                         <td>{dp.description}</td>
                                         <td className="text-danger"><i className="fa-solid fa-trash" onClick={() => { deleteDepartment(dp.id) }}></i></td>
-                                        <td className="text-warning"><i className="fa-solid fa-pen-to-square" onClick={() => { handleEditingDepartmentData(dp); }}></i></td>
+                                        <td className="text-warning"><Link to={"/add-department?depId="+dp.id}><i className="fa-solid fa-pen-to-square"></i></Link></td>
                                     </tr>
                                 </tbody>
                             </table>
