@@ -134,7 +134,7 @@ function AddEmploy() {
                     </select>
                 </div>
                 {/* Button For Saving Employess Data */}
-                <Link to="/"><button type="button" className="btn btn-success" onClick={addEmployee}>Submit</button></Link>
+                <Link to="/"><button type="button" className="btn btn-success col-md-12" onClick={addEmployee}>Submit</button></Link>
             </div>
         </div>
     )

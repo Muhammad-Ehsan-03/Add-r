@@ -18,15 +18,6 @@ function EmployessCrud() {
   }, []);
   return (
     <div>
-      {/*  Crud Header of Html  */}
-      <div className="header">
-        <div className="home_icon">
-          <i className="fa-solid fa-house-chimney"></i>
-        </div>
-        <div className="user_icon">
-          <i className="fa-solid fa-user"></i> <h5>Employees Managment</h5>
-        </div>
-      </div>
       {/* Space Between header and body */}
       <div className="space"></div>
       {/* Crud Header is End Here */}

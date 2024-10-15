@@ -3,13 +3,13 @@ import { Idepartment } from "../department/Department";
 import { Link, useSearchParams } from "react-router-dom";
 
 function AddDepartment() {
+    debugger;
     let [search, setSearch] = useSearchParams();
     // Variable for getting Employees Data 
 
     let [departmentName, setDepartmentName] = useState('');
     let [description, setDescription] = useState('');
     let [code, setCode] = useState<number>(100);
-    let [dpId,setDpId] = useState<number>(0);
 
     // Array For Employees Data
     let [departmentData, setdepartmentData] = useState<Array<Idepartment>>([]);
@@ -20,8 +20,8 @@ function AddDepartment() {
     let departmentIdd = useRef(0);
     let departmentCode = useRef(100);
 
-    useEffect(() => {
-        setDpId(Number(search.get('depId')));       
+    let dpId=Number(search.get('depId'));
+    useEffect(() => {       
         //  Fetching data of Department
         if (localStorage.getItem('departmentData') != null) {
             console.log('page Refresh');
