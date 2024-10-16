@@ -38,6 +38,7 @@ function AddEmploy() {
             setEmployeesArray(employees);
             employees.map((em: Iemployees) => {
                 if (em.id == id) {
+                    setEmployeeId(em.id);
                     setfirstName(em.firstName);
                     setlastName(em.lastName);
                     setAddress(em.Address);
@@ -80,7 +81,8 @@ function AddEmploy() {
                         Address: address,
                         contact: contact,
                         departmentcode: departmentCode,
-                        educations: []
+                        educations: [],
+                        skills:[]
                     }
                 )
                 const newData = [...EmployeesArray];
@@ -88,7 +90,6 @@ function AddEmploy() {
                 localStorage.setItem('EmployeesData', JSON.stringify(newData));
             }
         }
-        let a=id
         if (id !== 0) {
             // let index = findIndex(employeesId);
             let index;

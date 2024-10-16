@@ -94,14 +94,15 @@ function EmployeeDetails() {
                                 </tr>
                                 <tr>
                                     <td><label><b>Action 1</b></label></td>
-                                    <td className="text-warning"><Link to={"/add-employee?id="+employee.id}><i className="fa-solid fa-pen-to-square"></i></Link></td>
+                                    <td className="text-warning"><Link to={"/add-employee?id=" + employee.id}><i className="fa-solid fa-pen-to-square"></i></Link></td>
                                 </tr>
                                 <tr>
                                     <td><label><b>Action 2</b></label></td>
                                     <td className="text-danger"><i className="fa-solid fa-trash" onClick={() => { deleteEmployeeData(employee.id) }}></i></td>
                                 </tr>
                                 <tr>
-                                <tr><Link to={"/education?id=" + employee.id}><button className="btn btn-success">Qualification</button></Link></tr>  
+                                    <td><Link to={"/education?id=" + employee.id}><button className="btn btn-success">Qualification</button></Link></td>
+                                    <td><Link to={"/print-one-employee-skills?ide=" + employee.id}><button className="btn btn-success">Skills</button></Link></td>
                                 </tr>
                             </tbody>
                         </table>

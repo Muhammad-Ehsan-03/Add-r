@@ -3,7 +3,6 @@ import { Idepartment } from "../department/Department";
 import { Link, useSearchParams } from "react-router-dom";
 
 function AddDepartment() {
-    debugger;
     let [search, setSearch] = useSearchParams();
     // Variable for getting Employees Data 
 
@@ -60,9 +59,8 @@ function AddDepartment() {
             localStorage.setItem('dpCode', JSON.stringify(departmentCode.current));
             localStorage.setItem('depatmentIde', JSON.stringify(departmentIdd.current));
         }
-        console.log('Hello');
-
     }, []);
+
 
     // function for Saving and Editing Department data
 

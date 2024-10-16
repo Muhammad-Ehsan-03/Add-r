@@ -27,8 +27,7 @@ function Education() {
             }
             )
         }
-    }
-        , []);
+}, []);
 
         const deleteEmployeeEducation = (e: any) => {
             EmployeesArray[employeeIndex!].educations.splice(e, 1);
@@ -43,7 +42,7 @@ function Education() {
                     <div className="header-2">
                         <h4 className="  animate_animate__fadeInDownBig ">Qualification of {employee?.firstName} {employee?.lastName}</h4>
                         <div className="Add-Education">
-                          <Link to="/add-education?educationId=0"><button type="button" className="btn btn-success" ><i className="fa-solid fa-book-open"></i>Add Education</button></Link>
+                          <Link to={"/add-education?education=0&employeeId="+employee?.id}><button type="button" className="btn btn-success" ><i className="fa-solid fa-book-open"></i>Add Education</button></Link>
                         </div>
                     </div>
                 </div>
@@ -68,7 +67,7 @@ function Education() {
                                         <td>{em.title}</td>
                                         <td>{em.level}</td>
                                         <td className="text-danger"><i className="fa-solid fa-trash"  onClick={() => { deleteEmployeeEducation(i) }}></i></td>
-                                        <td className="text-warning"><Link to={"/add-education?employeeId="+employee!.id+"&educationId="+em.id}><i className="fa-solid fa-pen-to-square"></i></Link></td>
+                                        <td className="text-warning"><Link to={"/add-education?employeeId="+employee?.id+"&educationId="+em.id}><i className="fa-solid fa-pen-to-square"></i></Link></td>
                                     </tr>
                                 </tbody>
                             ))

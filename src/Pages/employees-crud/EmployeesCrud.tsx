@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Iskill } from '../add-skills/AddSkills';
+import { IoneEmployeeSkill } from '../skills/Skills';
 // import Department, { DepartmentDatatype } from './Department';
 function EmployessCrud() {
   // Array For Employees Data
@@ -59,6 +61,7 @@ export interface Iemployees {
   contact: number;
   departmentcode: number;
   educations: Array<Ieducation>;
+  skills:Array<IoneEmployeeSkill>;
 }
 export interface Ieducation {
   id: number;

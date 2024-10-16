@@ -8,6 +8,10 @@ import Layout from './Pages/layout/Layout';
 import AddEmploy from './Pages/add-employee/AddEmploy';
 import Add_Education from './Pages/add-education/Add_Education';
 import AddDepartment from './Pages/add-department/AddDepartment';
+import Skills from './Pages/skills/Skills';
+import AddSkills from './Pages/add-skills/AddSkills';
+import PrintSkills from './Pages/print-skills/PrintSkills';
+import PrintOneEmployeeSkills from './Pages/print-one-employee-skills/PrintOneEmployeeSkills';
 function App() {
 
   return (
@@ -22,6 +26,11 @@ function App() {
             <Route path='department' element={<Department />}></Route>
             <Route path='add-education' element={<Add_Education/>}></Route>
             <Route path='add-department' element={<AddDepartment/>}></Route>
+            <Route path='skills' element={<Skills/>}></Route>
+            <Route path='add-skills' element={<AddSkills/>}></Route>
+            <Route path='print-skills' element={<PrintSkills/>}></Route>
+            <Route path='skills' element={<Skills/>}></Route>
+            <Route path='print-one-employee-skills' element={<PrintOneEmployeeSkills/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

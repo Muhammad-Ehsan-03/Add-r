@@ -22,6 +22,7 @@ function Layout() {
                     <Link to="employees-crud"style={{ textDecoration: 'none' }}><span>Employees List</span></Link>
                     <Link to="/department"style={{ textDecoration: 'none' }}><span>Department</span></Link>
                     <Link to="add-employee?id=0"style={{ textDecoration: 'none' }}><span>Add Employee</span></Link>
+                    <Link to="print-skills?id=0"style={{ textDecoration: 'none' }}><span>Skills</span></Link>
                 </div>
             </div>
             <div className="body">

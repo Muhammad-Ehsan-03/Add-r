@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Ieducation, Iemployees } from "../employees-crud/EmployeesCrud";
 import { json, Link, useSearchParams } from "react-router-dom";
+import Education from '../education/Education';
 
 function Add_Education() {
     let [search, setSearch] = useSearchParams();
@@ -52,9 +53,6 @@ function Add_Education() {
             setEducationId(eduId.current);
             localStorage.setItem('ide', JSON.stringify(eduId.current));
             eduId.current = parseInt(localStorage.ide);
-            console.log("EducationIdAfter = ",eduId);
-
-
         }
 
     }, []);
@@ -80,7 +78,14 @@ function Add_Education() {
                 EmployeesArray[indexOfEmployee!].educations[indexEdu!].level = educationLevel;
             }
             if(educationIdForEdit==0) {
-                EmployeesArray[index].educations.push({ id: educationId, title: title, level: educationLevel });
+                let employeeIndex;
+                EmployeesArray.map((em:Iemployees,i:any) => {
+                    if(em.id==index)
+                    {
+                        employeeIndex=i;
+                    }
+                })
+                EmployeesArray[employeeIndex!].educations.push({ id: educationId, title: title, level: educationLevel });
             }
         }
         const newData = [...EmployeesArray];
