@@ -30,18 +30,23 @@ function EmployessCrud() {
         <div className="header-2 all-Employees-List">
           <h4>Manage Employees</h4>
         </div>
-        {
-          EmployeesArray.map((emp: Iemployees) => (
-            <table className="table table-striped">
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Employees Name</th>
+            </tr>
+          </thead>
+          {
+            EmployeesArray.map((emp: Iemployees) => (
               <tbody>
                 <tr>
                   <td>{emp.firstName} {emp.lastName}</td>
                   <td><Link to={"/employeeDetails?id=" + emp.id}><button type="button" className="btn btn-info">View</button></Link></td>
                 </tr>
               </tbody>
-            </table>
-          ))
-        }
+            ))
+          }
+        </table>
       </div>
 
       {/* Employees html is end here */}
@@ -61,7 +66,7 @@ export interface Iemployees {
   contact: number;
   departmentcode: number;
   educations: Array<Ieducation>;
-  skills:Array<IoneEmployeeSkill>;
+  skills: Array<IoneEmployeeSkill>;
 }
 export interface Ieducation {
   id: number;

@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Idepartment } from "../department/Department";
 import { Link, useSearchParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function AddDepartment() {
     let [search, setSearch] = useSearchParams();
     // Variable for getting Employees Data 
 
-    let [departmentName, setDepartmentName] = useState('');
-    let [description, setDescription] = useState('');
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
+
     let [code, setCode] = useState<number>(100);
 
     // Array For Employees Data
@@ -15,23 +16,22 @@ function AddDepartment() {
 
     // Variable for Handling Department Id 
 
-    let [departmentid, setdepartmentId] = useState<number>();
+    let [departmentId, setDepartmentId] = useState<number>(0);
     let departmentIdd = useRef(0);
     let departmentCode = useRef(100);
 
-    let dpId=Number(search.get('depId'));
-    useEffect(() => {       
+    let dpId = Number(search.get('depId'));
+
+    useEffect(() => {
         //  Fetching data of Department
         if (localStorage.getItem('departmentData') != null) {
             console.log('page Refresh');
             const oldData = JSON.parse(localStorage.departmentData);
             setdepartmentData(oldData);
-            oldData.map((dp:Idepartment) => {
-                if(dpId==dp.id)
-                {
-                    setdepartmentId(dp.id);
-                    setDepartmentName(dp.department);
-                    setDescription(dp.description);
+            oldData.map((dp: Idepartment) => {
+                if (dpId == dp.id) {
+                    setDepartmentId(dp.id);
+                    reset(dp)
                 }
             })
         }
@@ -41,60 +41,52 @@ function AddDepartment() {
         else {
             localStorage.setItem('dpCode', '100');
         }
-        if (localStorage.getItem('depatmentIde')) {
-            departmentIdd.current = parseInt(localStorage.depatmentIde);
+        if (localStorage.getItem('departmentIde')) {
+            departmentIdd.current = parseInt(localStorage.departmentIde);
         }
         else {
-            localStorage.setItem('depatmentIde', '100');
+            localStorage.setItem('departmentIde', '0');
         }
-        
-    if(dpId==0)
-        {
-            console.log('department Code before = ',departmentCode)
+        if (dpId == 0) {
             departmentIdd.current++;
-            setdepartmentId(departmentIdd.current);
+            setDepartmentId(departmentIdd.current);
             departmentCode.current++;
             setCode(departmentCode.current);
-            console.log('department Code before = ',departmentCode.current)
             localStorage.setItem('dpCode', JSON.stringify(departmentCode.current));
-            localStorage.setItem('depatmentIde', JSON.stringify(departmentIdd.current));
+            localStorage.setItem('departmentIde', JSON.stringify(departmentIdd.current));
         }
     }, []);
 
 
     // function for Saving and Editing Department data
 
-    const addEmploy = () => {
-        if (dpId == 0) {
-            if (departmentid && departmentName && description) {
-                departmentData.push(
-                    {
-                        code: code,
-                        id: departmentid,
-                        department: departmentName,
-                        description: description
+    const add = (data: any) => {
+        if (data.description&& data.department) {
+            if (dpId == 0) {
+                    data.code = code;
+                    console.log("Hello = ", departmentId)
+                    data.id = departmentId;
+                    departmentData.push(data);
+                    const newData = [...departmentData];
+                    setdepartmentData(newData);
+                    localStorage.setItem('departmentData', JSON.stringify(newData));
+                }
+            if (dpId > 0) {
+                let index;
+                departmentData.map((d, i) => {
+                    if (d.id == departmentId) {
+                        index = i;
                     }
+                }
                 )
+                departmentData[index!].description = data.description;
+                departmentData[index!].department = data.department;
                 const newData = [...departmentData];
                 setdepartmentData(newData);
                 localStorage.setItem('departmentData', JSON.stringify(newData));
             }
         }
-        if (dpId > 0) {
-            let index;
-            departmentData.map((d, i) => {
-                if (d.id == departmentid) {
-                    index = i;
-                }
-            }
-            )
-            departmentData[index!].description = description;
-            departmentData[index!].department = departmentName;
-            const newData = [...departmentData];
-            setdepartmentData(newData);
-            localStorage.setItem('departmentData', JSON.stringify(newData));
         }
-    }
     return (
         <div className="">
             {/* Creating Input Field for Getting Employees Data*/}
@@ -102,10 +94,22 @@ function AddDepartment() {
                 <div className="Header">
                     <h4>Update Department</h4>
                 </div>
-                <div className="input-field department">Department <p> Name</p><span>*</span><input type="text" className="form-control" placeholder="Enter Department Name" value={departmentName} onChange={(e: any) => { setDepartmentName(e.target.value) }} /></div>
-                <div className="input-field description"> Description<span>*</span><input type="text" className="form-control" placeholder="Enter Department Description" value={description} onChange={(e: any) => { setDescription(e.target.value) }} /></div>
-                <div className="col-md-2 mx-auto">
-                   <Link to="/"> <button type="button" onClick={() => { addEmploy(); }} className="btn btn-success">SUBMIT</button></Link></div>
+                <form onSubmit={handleSubmit(add)}>
+                    <div className="input-field department">Department <p> Name</p><span>*</span><input type="text" className="form-control" placeholder="Enter Department Name" {...register("department", {
+                        required: { value: true, message: 'Department is required' },
+                        minLength: { value: 3, message: "Department at least three characters" },
+                        maxLength: { value: 20, message: "Department Maximum characters is 30" },
+                    })} /></div>
+                    {errors.department && <span style={{ color: "red" }} id="errors">{errors.department.message}</span>}
+                    <div className="input-field description"> Description<span>*</span><input type="text" className="form-control" placeholder="Enter Department Description" {...register("description", {
+                        required: { value: true, message: 'Department description is required' },
+                        minLength: { value: 8, message: "Department description at least three characters" },
+                        maxLength: { value: 40, message: "Department description Maximum characters is 30" },
+                    })} /></div>
+                    {errors.description && <span style={{ color: "red" }} id="errors">{errors.description.message}</span>}
+                    <div className="col-md-2 mx-auto">
+                        <button type="submit" className="btn btn-success">SUBMIT</button></div>
+                </form>
             </div>
         </div>
     )

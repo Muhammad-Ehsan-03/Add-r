@@ -45,23 +45,25 @@ function Department() {
                     <div className="header-2 depatment-list">
                         <h4>Manage DepartMent</h4>
                         <div className="back-button">
-                            <Link to={"/add-department?depId=0"}> <button type="button" className="btn btn-success">Add</button></Link>
+                            <Link to={"/add-department?depId=0"} style={{ textDecoration: 'none' }}> <button type="button" className="btn btn-success">Add</button></Link>
                         </div>
                         <div className="back-button">
                             <button type="button" className="btn btn-success"><i className="fa-solid fa-circle-arrow-left"> </i>Back</button>
                         </div>
                     </div>
-                    {
-                        departmentData.map((dp: Idepartment) => (
-                            <table className="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Department code</th>
-                                        <th scope="col">Department Name</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
+
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Department code</th>
+                                <th scope="col">Department Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        {
+                            departmentData.map((dp: Idepartment) => (
+
                                 <tbody>
                                     <tr>
                                         <td>{dp.code}</td>
@@ -71,9 +73,9 @@ function Department() {
                                         <td className="text-warning"><Link to={"/add-department?depId=" + dp.id}><i className="fa-solid fa-pen-to-square"></i></Link></td>
                                     </tr>
                                 </tbody>
-                            </table>
-                        ))
-                    }
+                            ))
+                        }
+                    </table>
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ function Layout() {
                     <i className="fa-solid fa-user"></i> <h5>Department Managment</h5>
                 </div>
             </div>
-            
             <div className="NaveBar">
                 <div className="logo">
                     EMPLOYEES CRUD
@@ -23,6 +22,7 @@ function Layout() {
                     <Link to="/department"style={{ textDecoration: 'none' }}><span>Department</span></Link>
                     <Link to="add-employee?id=0"style={{ textDecoration: 'none' }}><span>Add Employee</span></Link>
                     <Link to="print-skills?id=0"style={{ textDecoration: 'none' }}><span>Skills</span></Link>
+                    <Link to="print-user"style={{ textDecoration: 'none' }}><span>Print Data</span></Link>
                 </div>
             </div>
             <div className="body">

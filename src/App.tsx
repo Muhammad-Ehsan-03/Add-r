@@ -12,8 +12,9 @@ import Skills from './Pages/skills/Skills';
 import AddSkills from './Pages/add-skills/AddSkills';
 import PrintSkills from './Pages/print-skills/PrintSkills';
 import PrintOneEmployeeSkills from './Pages/print-one-employee-skills/PrintOneEmployeeSkills';
+import PrintUser from './Pages/print-user/PrintUser';
+import Todo from './Pages/todo/todo';
 function App() {
-
   return (
     <div>
       <BrowserRouter>
@@ -31,6 +32,8 @@ function App() {
             <Route path='print-skills' element={<PrintSkills/>}></Route>
             <Route path='skills' element={<Skills/>}></Route>
             <Route path='print-one-employee-skills' element={<PrintOneEmployeeSkills/>}></Route>
+            <Route path='print-user' element={<PrintUser/>}></Route>
+            <Route path='todo' element={<Todo/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

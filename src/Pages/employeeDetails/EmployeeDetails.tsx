@@ -35,7 +35,6 @@ function EmployeeDetails() {
     }
         , []);
     const deleteEmployeeData = (e: any) => {
-        debugger;
         let index;
         EmployeesArray.map((c, i) => {
             if (c.id == e) {
@@ -58,7 +57,7 @@ function EmployeeDetails() {
                             <button type="button" className="btn btn-success">Back</button>
                         </div>
                     </div>
-                    {employee == undefined ? (
+                    {employee == null ? (
                         <div className="alert alert-danger" role="alert">
                             The employee of this ID does not exist.
                         </div>
@@ -98,7 +97,7 @@ function EmployeeDetails() {
                                 </tr>
                                 <tr>
                                     <td><label><b>Action 2</b></label></td>
-                                    <td className="text-danger"><i className="fa-solid fa-trash" onClick={() => { deleteEmployeeData(employee.id) }}></i></td>
+                                    <td className="text-danger"><Link to="/employees-crud"><i className="fa-solid fa-trash" style={{color:"red"}} onClick={() => { deleteEmployeeData(employee.id) }}></i></Link></td>
                                 </tr>
                                 <tr>
                                     <td><Link to={"/education?id=" + employee.id}><button className="btn btn-success">Qualification</button></Link></td>
